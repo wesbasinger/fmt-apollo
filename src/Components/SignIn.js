@@ -2,6 +2,8 @@ import React from 'react';
 
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
+
+import CastPicker from './CastPicker';
  
 class SignIn extends React.Component {
     
@@ -9,12 +11,21 @@ class SignIn extends React.Component {
         super(props);
         this.state = {
             worker: "",
-            cast: "---",
-            workFromHome: false,
+            castId: "---",
+            slug: "",
+            remote: false,
             comment: ""
         }
+        
+        this.handleCastChange = this.handleCastChange.bind(this);
     }
     
+    handleCastChange(fieldValue) {
+        const delim = fieldValue.split(":");
+        const castId = delim[0];
+        const slug = delim[1];
+        this.setState({castId, slug})
+    }
 
     render() {
         return(
@@ -25,19 +36,7 @@ class SignIn extends React.Component {
                         onChange={(e) => {
                             this.setState({worker: e.target.value})
                         }} />
-                    <label htmlFor="cast">Cast</label>
-                    <select value={this.state.cast} onChange={(e) => {this.setState({cast: e.target.value})}}>
-                        <option>---</option>
-                        {
-                            this.props.data.activeCast ? this.props.data.activeCast.map((cast) => {
-                                return(
-                                <option key={cast.Id} 
-                                value={cast.Id + ":" + cast.sessions[0].slug}>
-                                    {cast.firstName + " " + cast.lastName}
-                                </option>)
-                            }) : <option></option>
-                        }
-                    </select>
+                    <CastPicker onCastChange={this.handleCastChange} />
                     <label htmlFor="work-from-home">Work From Home</label>
                     <input type="checkbox" value={this.state.workFromHome} onChange={(e) => {
                         this.setState({workFromHome: !this.state.workFromHome})}} />
@@ -49,19 +48,5 @@ class SignIn extends React.Component {
     }
 }
 
-const query  = gql`
-query {
-  activeCast {
-    Id
-    firstName
-    lastName
-    sessions {
-      slug
-    }
-  }
-}`
-
-const LoadedDataSignIn = graphql(query)(SignIn)
-
-export default LoadedDataSignIn;
+export default SignIn;
 
