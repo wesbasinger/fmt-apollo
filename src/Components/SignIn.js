@@ -1,4 +1,7 @@
 import React from 'react';
+
+import { graphql } from 'react-apollo';
+import gql from 'graphql-tag';
  
 class SignIn extends React.Component {
     
@@ -25,8 +28,15 @@ class SignIn extends React.Component {
                     <label htmlFor="cast">Cast</label>
                     <select value={this.state.cast} onChange={(e) => {this.setState({cast: e.target.value})}}>
                         <option>---</option>
-                        <option value="Annabelle">Annabelle</option>
-                        <option value="Joey">Joey</option>
+                        {
+                            this.props.data.activeCast ? this.props.data.activeCast.map((cast) => {
+                                return(
+                                <option key={cast.Id} 
+                                value={cast.Id + ":" + cast.sessions[0].slug}>
+                                    {cast.firstName + " " + cast.lastName}
+                                </option>)
+                            }) : <option></option>
+                        }
                     </select>
                     <label htmlFor="work-from-home">Work From Home</label>
                     <input type="checkbox" value={this.state.workFromHome} onChange={(e) => {
@@ -39,5 +49,19 @@ class SignIn extends React.Component {
     }
 }
 
-export default SignIn;
+const query  = gql`
+query {
+  activeCast {
+    Id
+    firstName
+    lastName
+    sessions {
+      slug
+    }
+  }
+}`
+
+const LoadedDataSignIn = graphql(query)(SignIn)
+
+export default LoadedDataSignIn;
 
