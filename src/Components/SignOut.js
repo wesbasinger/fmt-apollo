@@ -13,7 +13,17 @@ class SignOut extends React.Component {
     render() {
         return (
             <div>
-                <form>
+                <form onSubmit={(e) => {
+                    e.preventDefault()
+                    
+                    this.props.mutate({
+                        variables: {hoursId: this.state.hourId}
+                    }).then(({data}) => {
+                        console.log(data)
+                    }).catch((error) => {
+                        console.log(error)
+                    })
+                }}>
                     <select value={this.state.hourId} onChange={(e) => {this.setState({hourId: e.target.value})}}>
                         <option>---</option>
                         {
@@ -39,7 +49,17 @@ query {
   }
 }`
 
-const LoadedSignOut = graphql(query)(SignOut)
+const mutation = gql`
+  mutation punchOut($hoursId: String) {
+    punchOut(hoursId: $hoursId) {
+        newHours {
+            Id
+        }
+    }
+  }
+`;
+
+const LoadedSignOut = compose(graphql(query), graphql(mutation))(SignOut)
 
 export default LoadedSignOut;
 
