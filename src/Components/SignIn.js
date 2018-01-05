@@ -2,6 +2,8 @@
 
 import React from 'react';
 
+import { Redirect } from 'react-router-dom';
+
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 
@@ -19,7 +21,8 @@ class SignIn extends React.Component {
             slug: "",
             remote: false,
             comment: "",
-            geolocation: {}
+            geolocation: {},
+            formComplete: false
         }
         
         this.handleCastChange = this.handleCastChange.bind(this);
@@ -43,44 +46,52 @@ class SignIn extends React.Component {
     }
 
     render() {
-        return(
-            <div>
-                <form onSubmit={(e) => {
-                    e.preventDefault();
-                    
-                    if(this.state.remote && isRemote(this.state.geolocation)) {
-                        alert("Must check work from home if you are remote.");
-                    } else {
-                        this.props.mutate({
-                            variables: {
-                                worker: this.state.worker,
-                                sessionSlug: this.state.slug,
-                                comment: this.state.comment,
-                                castId: this.state.castId,
-                                remote: this.state.remote
-                            }
-                        }).then(({data}) =>{
-                            console.log(data);
-                        }).catch((errors) => {
-                            console.log(errors);
-                        })
-                    }
-                }}>
-                    <label htmlFor="worker">Worker</label>
-                    <input type="text" required="true" value={this.state.worker}
-                        onChange={(e) => {
-                            this.setState({worker: e.target.value})
-                        }} />
-                    <CastPicker onCastChange={this.handleCastChange} />
-                    <label htmlFor="work-from-home">Work From Home</label>
-                    <input type="checkbox" value={this.state.workFromHome} onChange={(e) => {
-                        this.setState({workFromHome: !this.state.workFromHome})}} />
-                    <label htmlFor="comment">Comment</label>
-                    <input type="text" value={this.state.comment} onChange={(e) => {this.setState({comment: e.target.value})}} />
-                    <button type="submit">Submit</button>
-                </form>
-            </div>
-        )
+        if(this.state.formComplete) {
+            return(<Redirect to="/" from="/signIn" />);
+        } else {
+            return(
+                <div>
+                    <form onSubmit={(e) => {
+                        e.preventDefault();
+                        
+                        const self = this;
+                        
+                        if(this.state.remote && isRemote(this.state.geolocation)) {
+                            alert("Must check work from home if you are remote.");
+                        } else {
+                            this.props.mutate({
+                                variables: {
+                                    worker: this.state.worker,
+                                    sessionSlug: this.state.slug,
+                                    comment: this.state.comment,
+                                    castId: this.state.castId,
+                                    remote: this.state.remote
+                                }
+                            }).then(({data}) =>{
+                                console.log(data);
+                                self.setState({formComplete:true})
+                            }).catch((errors) => {
+                                console.log(errors);
+                                self.setState({formComplete:true})
+                            })
+                        }
+                    }}>
+                        <label htmlFor="worker">Worker</label>
+                        <input type="text" required="true" value={this.state.worker}
+                            onChange={(e) => {
+                                this.setState({worker: e.target.value})
+                            }} />
+                        <CastPicker onCastChange={this.handleCastChange} />
+                        <label htmlFor="work-from-home">Work From Home</label>
+                        <input type="checkbox" value={this.state.workFromHome} onChange={(e) => {
+                            this.setState({workFromHome: !this.state.workFromHome})}} />
+                        <label htmlFor="comment">Comment</label>
+                        <input type="text" value={this.state.comment} onChange={(e) => {this.setState({comment: e.target.value})}} />
+                        <button type="submit">Submit</button>
+                    </form>
+                </div>
+            )
+        }
     }
 }
 
