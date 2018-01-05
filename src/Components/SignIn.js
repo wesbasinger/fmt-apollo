@@ -1,3 +1,5 @@
+/*global navigator */
+
 import React from 'react';
 
 import { graphql } from 'react-apollo';
@@ -100,4 +102,3 @@ const mutation = gql`
 const MutationForm = graphql(mutation)(SignIn);
 
 export default MutationForm;
-
