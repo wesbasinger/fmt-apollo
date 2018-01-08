@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { Link } from 'react-router-dom';
+
 import CastPicker from './CastPicker'
 
 class Lookup extends React.Component {
@@ -7,7 +9,6 @@ class Lookup extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            formComplete: false,
             castId: "",
             slug: ""
         }
@@ -24,19 +25,14 @@ class Lookup extends React.Component {
     
     render() {
         
-        if (!this.state.formComplete) {
-            return(
-                <div>
-                    <form onSubmit={(e) => {
-                        e.preventDefault();
-                        // need to do a mutation with castID and slug here.
-                    }}>
-                        <CastPicker onCastChange={this.handleCastChange} />
-                        <button type="submit">Submit</button>
-                    </form>
-                </div>
-            )
-        }
+        const castDetailLink = `/castDetail/${this.state.castId}/${this.state.slug}`;
+        
+        return(
+            <div>
+                <CastPicker onCastChange={this.handleCastChange} />
+                <Link to={castDetailLink}><button>Lookup</button></Link>
+            </div>
+        )
     }
 }
 

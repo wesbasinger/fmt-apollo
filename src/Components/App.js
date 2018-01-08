@@ -8,6 +8,7 @@ import Landing from './Landing';
 import Lookup from './Lookup';
 import SignIn from './SignIn';
 import SignOut from './SignOut'
+import CastDetail from './CastDetail';
 
 const App = () => {
     return (
@@ -19,6 +20,7 @@ const App = () => {
                     <Route path="/lookup" component={Lookup} />
                     <Route path="/signIn" component={SignIn} />
                     <Route path="/signOut" component={SignOut} />
+                    <Route path="/castDetail/:castId/:slug" component={CastDetail} />
                 </Switch>
                 <Footer />
             </div>
