@@ -3,10 +3,30 @@ import React from 'react';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 
+import SessionDetail from './SessionDetail';
+
 const CastDetail = (props) => {
-    return(
-        <div>This is a cast detail</div>
-    )
+    
+    const cast = (props.data.singleCast)
+    
+    if (cast) {
+        return(
+            <div>
+                <h1>Cast Detail for {cast.firstName + " " + cast.lastName}</h1>
+                {
+                    cast.sessions.map((session) => {
+                        if (session.active) {
+                            return(<SessionDetail key={session.slug} show={session.show} slug={session.slug} hours={session.hours}/>);
+                        } else {
+                            return(<div key={session.slug}></div>)
+                        }
+                    })
+                }
+            </div>
+        )
+    } else {
+        return(<div></div>)
+    }
 }
 
 const query = gql`
@@ -36,7 +56,6 @@ query singleCast($Id: String){
 
 const LoadedCastDetail = graphql(query, {
     options: (ownProps) => {
-        console.log(ownProps)
         return({variables: {Id: ownProps.match.params.castId}})
     }
 })(CastDetail)
