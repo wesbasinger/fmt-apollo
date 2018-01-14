@@ -9,6 +9,7 @@ import Lookup from './Lookup';
 import SignIn from './SignIn';
 import SignOut from './SignOut'
 import CastDetail from './CastDetail';
+import CreateCast from './CreateCast';
 
 const App = () => {
     return (
@@ -21,6 +22,7 @@ const App = () => {
                     <Route path="/signIn" component={SignIn} />
                     <Route path="/signOut" component={SignOut} />
                     <Route path="/castDetail/:castId/:slug" component={CastDetail} />
+                    <Route path="/create" component={CreateCast} />
                 </Switch>
                 <Footer />
             </div>

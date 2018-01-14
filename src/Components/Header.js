@@ -32,7 +32,7 @@ class Header extends React.Component {
                     <li><Link to="/signOut">Sign Out</Link></li>
                     <li><Link to="/lookup">Lookup</Link></li>
                     {
-                        this.state.loggedIn ? <li><Link to="/add">Add Cast</Link></li> : ""
+                        this.state.loggedIn ? <li><Link to="/create">Create Cast</Link></li> : ""
                     }
                     {
                         this.state.loggedIn ? <li><Link to="/download">Download Data</Link></li> : ""
