@@ -10,6 +10,7 @@ import SignIn from './SignIn';
 import SignOut from './SignOut'
 import CastDetail from './CastDetail';
 import CreateCast from './CreateCast';
+import AddSession from './AddSession';
 
 const App = () => {
     return (
@@ -23,6 +24,7 @@ const App = () => {
                     <Route path="/signOut" component={SignOut} />
                     <Route path="/castDetail/:castId/:slug" component={CastDetail} />
                     <Route path="/create" component={CreateCast} />
+                    <Route path="/add" component={AddSession} />
                 </Switch>
                 <Footer />
             </div>

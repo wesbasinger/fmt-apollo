@@ -35,6 +35,9 @@ class Header extends React.Component {
                         this.state.loggedIn ? <li><Link to="/create">Create Cast</Link></li> : ""
                     }
                     {
+                        this.state.loggedIn ? <li><Link to="/add">Add Session to Cast</Link></li> : ""
+                    }
+                    {
                         this.state.loggedIn ? <li><Link to="/download">Download Data</Link></li> : ""
                     }                   
                     {
