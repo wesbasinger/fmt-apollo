@@ -36,16 +36,18 @@ class CreateCast extends React.Component {
                         alert(errors)
                     })
                 }}>
-                    <label htmlFor="firstName">First Name</label>
-                    <input type="text" required="true" value={this.state.firstName}
-                        onChange={(e) => {
-                            this.setState({firstName: e.target.value})
-                        }} />
-                    <label htmlFor="lastName">Last Name</label>
-                    <input type="text" required="true" value={this.state.lastName}
-                        onChange={(e) => {
-                            this.setState({lastName: e.target.value})
-                        }} />
+                    <div className="form-group">
+                        <label htmlFor="firstName">First Name</label>
+                        <input className="form-control" type="text" required="true" value={this.state.firstName}
+                            onChange={(e) => {
+                                this.setState({firstName: e.target.value})
+                            }} />
+                        <label htmlFor="lastName">Last Name</label>
+                        <input className="form-control" type="text" required="true" value={this.state.lastName}
+                            onChange={(e) => {
+                                this.setState({lastName: e.target.value})
+                            }} />
+                    </div>
                     <button type="submit">Submit</button>
                 </form>
             </div>

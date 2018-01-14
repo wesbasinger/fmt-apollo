@@ -115,16 +115,16 @@ const SessionDetail = ({show, slug, hours}) => {
             <h3>Logged Hours: {formatHours(totalHours(hours))}</h3>
             <h3>Remaining Hours: { (totalHours(hours) < 16) ? formatHours(16 - totalHours(hours)) : "Finished!"}</h3>
             <h3>History</h3>
-            <table>
+            <table className="table table-striped">
                 <thead>
                     <tr>
-                        <td>Worker</td>
-                        <td>Datestamp</td>
-                        <td>Time In</td>
-                        <td>Time Out</td>
-                        <td>Remote</td>
-                        <td>Comment</td>
-                        <td>Time Logged</td>
+                        <th>Worker</th>
+                        <th>Datestamp</th>
+                        <th>Time In</th>
+                        <th>Time Out</th>
+                        <th>Remote</th>
+                        <th>Comment</th>
+                        <th>Time Logged</th>
                     </tr>
                 </thead>
                 <tbody>

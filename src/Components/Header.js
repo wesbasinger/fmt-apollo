@@ -53,7 +53,7 @@ class Header extends React.Component {
                   </ul>
                   <div>
                     {
-                        !this.state.loggedIn ? <Login onSubmit={this.handleSubmit}/> : <button onClick={ () => {this.setState({loggedIn: false})}}>Sign Out</button>
+                        !this.state.loggedIn ? <Login onSubmit={this.handleSubmit}/> : <button className="btn btn-default" onClick={ () => {this.setState({loggedIn: false})}}>Sign Out</button>
                     }
                   </div>
                 </div>

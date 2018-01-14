@@ -81,18 +81,22 @@ class SignIn extends React.Component {
                             })
                         }
                     }}>
-                        <label htmlFor="worker">Worker</label>
-                        <input type="text" required="true" value={this.state.worker}
-                            onChange={(e) => {
-                                this.setState({worker: e.target.value})
-                            }} />
-                        <CastPicker onCastChange={this.handleCastChange} />
-                        <label htmlFor="work-from-home">Work From Home</label>
-                        <input type="checkbox" value={this.state.workFromHome} onChange={(e) => {
-                            this.setState({workFromHome: !this.state.workFromHome})}} />
-                        <label htmlFor="comment">Comment</label>
-                        <input type="text" value={this.state.comment} onChange={(e) => {this.setState({comment: e.target.value})}} />
-                        <button type="submit">Submit</button>
+                        <div className="form-group">
+                            <label htmlFor="worker">Worker</label>
+                            <input className="form-control" id="worker" type="text" required="true" value={this.state.worker}
+                                onChange={(e) => {
+                                    this.setState({worker: e.target.value})
+                                }} />
+                            <CastPicker onCastChange={this.handleCastChange} />
+                            <label htmlFor="comment">Comment</label>
+                            <input id="comment" className="form-control" type="text" value={this.state.comment} onChange={(e) => {this.setState({comment: e.target.value})}} />
+                        </div>
+                        <div className="form-check">
+                            <label htmlFor="work-from-home">Work From Home</label>
+                            <input id="work-from-home" className="form-check-input" type="checkbox" value={this.state.workFromHome} onChange={(e) => {
+                                this.setState({workFromHome: !this.state.workFromHome})}} />
+                        </div>
+                        <button className="btn btn-primary" type="submit">Submit</button>
                     </form>
                 </div>
             )

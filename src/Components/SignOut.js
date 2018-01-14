@@ -36,16 +36,19 @@ class SignOut extends React.Component {
                             self.setState({formComplete:true})
                         })
                     }}>
-                        <select value={this.state.hourId} onChange={(e) => {this.setState({hourId: e.target.value})}}>
-                            <option>---</option>
-                            {
-                                this.props.data.signIns ?
-                                this.props.data.signIns.map((signIn) => {
-                                    return(<option key={signIn.id} value={signIn.id}>{signIn.worker}</option>)
-                                }) : <option></option>
-                            }
-                        </select>
-                        <button type="submit">Submit</button>
+                        <div className="form-group">
+                            <label>Worker</label>
+                            <select className="form-control" value={this.state.hourId} onChange={(e) => {this.setState({hourId: e.target.value})}}>
+                                <option>---</option>
+                                {
+                                    this.props.data.signIns ?
+                                    this.props.data.signIns.map((signIn) => {
+                                        return(<option key={signIn.id} value={signIn.id}>{signIn.worker}</option>)
+                                    }) : <option></option>
+                                }
+                            </select>
+                        </div>
+                        <button className="btn btn-primary" type="submit">Submit</button>
                     </form>
                 </div>
             )

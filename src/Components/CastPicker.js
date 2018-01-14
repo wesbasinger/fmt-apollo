@@ -6,9 +6,9 @@ import { getActiveCast } from '../queries';
 
 const CastPicker = (props) => {
     return(
-        <div className="container" >
+        <div>
             <label htmlFor="cast">Cast</label>
-            <select onChange={(e) => {props.onCastChange(e.target.value)}}>
+            <select id="cast" className="form-control" onChange={(e) => {props.onCastChange(e.target.value)}}>
                 <option>---</option>
                 {
                     props.data.activeCast ? props.data.activeCast.map((cast) => {
