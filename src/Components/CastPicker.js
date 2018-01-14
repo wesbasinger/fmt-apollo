@@ -1,8 +1,8 @@
 import React from 'react';
 
 import { graphql } from 'react-apollo';
-import gql from 'graphql-tag';
 
+import { getActiveCast } from '../queries';
 
 const CastPicker = (props) => {
     return(
@@ -13,8 +13,8 @@ const CastPicker = (props) => {
                 {
                     props.data.activeCast ? props.data.activeCast.map((cast) => {
                         return(
-                        <option key={cast.Id} 
-                        value={cast.Id + ":" + cast.sessions[0].slug}>
+                        <option key={cast.id} 
+                        value={cast.id + ":" + cast.sessions[0].slug}>
                             {cast.firstName + " " + cast.lastName}
                         </option>)
                     }) : <option></option>
@@ -24,18 +24,6 @@ const CastPicker = (props) => {
     )
 }
 
-const query  = gql`
-query {
-  activeCast {
-    Id
-    firstName
-    lastName
-    sessions {
-      slug
-    }
-  }
-}`
-
-const LoadedCastPicker = graphql(query)(CastPicker);
+const LoadedCastPicker = graphql(getActiveCast)(CastPicker);
 
 export default LoadedCastPicker;

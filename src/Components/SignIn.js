@@ -9,6 +9,8 @@ import gql from 'graphql-tag';
 
 import isRemote from '../isRemote';
 
+import { getSignIns } from '../queries';
+
 import CastPicker from './CastPicker';
  
 class SignIn extends React.Component {
@@ -60,6 +62,9 @@ class SignIn extends React.Component {
                             alert("Must check work from home if you are remote.");
                         } else {
                             this.props.mutate({
+                                refetchQueries: [{
+                                    query: getSignIns
+                                }],
                                 variables: {
                                     worker: this.state.worker,
                                     sessionSlug: this.state.slug,
@@ -104,7 +109,7 @@ const mutation = gql`
     $remote: Boolean) {
     punchIn(worker: $worker, sessionSlug: $sessionSlug, comment: $comment, castId: $castId, remote: $remote) {
         newHours {
-            Id
+            id
         }
     }
   }

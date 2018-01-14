@@ -10,7 +10,7 @@ import App from './Components/App';
 
 const client = new ApolloClient({
   link: new HttpLink({ uri: 'https://fmt-gql-server.herokuapp.com/' }),
-  cache: new InMemoryCache()
+  cache: new InMemoryCache({dataIdFromObject: o => o.id})
 });
 
 

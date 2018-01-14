@@ -1,7 +1,8 @@
 import React from 'react';
 
 import { graphql } from 'react-apollo';
-import gql from 'graphql-tag';
+
+import { getSingleCast } from '../queries';
 
 import SessionDetail from './SessionDetail';
 
@@ -29,34 +30,9 @@ const CastDetail = (props) => {
     }
 }
 
-const query = gql`
-query singleCast($Id: String){
-    singleCast(Id: $Id) {
-        Id
-        firstName
-        lastName
-        sessions {
-          slug
-          show
-          active
-          hours {
-            Id
-            worker
-            comment
-            datestamp
-            timeIn
-            timeOut
-            castId
-            remote
-          }
-        }
-    }
-}
-`
-
-const LoadedCastDetail = graphql(query, {
+const LoadedCastDetail = graphql(getSingleCast, {
     options: (ownProps) => {
-        return({variables: {Id: ownProps.match.params.castId}})
+        return({variables: {id: ownProps.match.params.castId}})
     }
 })(CastDetail)
 

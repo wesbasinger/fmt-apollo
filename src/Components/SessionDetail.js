@@ -119,7 +119,7 @@ const SessionDetail = ({show, slug, hours}) => {
                     {
                         hours.map((hour) => {
                             return(
-                                <tr key={hour.Id}>
+                                <tr key={hour.id}>
                                     <td>{hour.worker || ""}</td>
                                     <td>{hour.datestamp || ""}</td>
                                     <td>{tsToDate(hour.timeIn) || ""}</td>

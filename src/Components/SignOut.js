@@ -5,6 +5,8 @@ import { Redirect } from 'react-router-dom';
 import { graphql, compose } from 'react-apollo';
 import gql from 'graphql-tag';
 
+import { getSignIns } from '../queries';
+
 class SignOut extends React.Component {
     
     constructor(props) {
@@ -24,6 +26,7 @@ class SignOut extends React.Component {
                         const self = this;
                         
                         this.props.mutate({
+                            refreshQueries: [{query: getSignIns}],
                             variables: {hoursId: this.state.hourId}
                         }).then(({data}) => {
                             console.log(data)
@@ -38,7 +41,7 @@ class SignOut extends React.Component {
                             {
                                 this.props.data.signIns ?
                                 this.props.data.signIns.map((signIn) => {
-                                    return(<option key={signIn.Id} value={signIn.Id}>{signIn.worker}</option>)
+                                    return(<option key={signIn.id} value={signIn.id}>{signIn.worker}</option>)
                                 }) : <option></option>
                             }
                         </select>
@@ -50,26 +53,18 @@ class SignOut extends React.Component {
     }
 }
 
-const query  = gql`
-query {
-  signIns {
-    Id
-    worker
-    remote
-  }
-}`
 
 const mutation = gql`
   mutation punchOut($hoursId: String) {
     punchOut(hoursId: $hoursId) {
         newHours {
-            Id
+            id
         }
     }
   }
 `;
 
-const LoadedSignOut = compose(graphql(query), graphql(mutation))(SignOut)
+const LoadedSignOut = compose(graphql(getSignIns), graphql(mutation))(SignOut)
 
 export default LoadedSignOut;
 
