@@ -96,13 +96,25 @@ const formatHours = (decimalHours) => {
     }
 }
 
+const totalHours = (hoursArray) => {
+    let total = 0;
+    
+    hoursArray.forEach((hours) => {
+        total += calcHours(hours.timeIn, hours.timeOut)
+    })
+    
+    return total;
+}
+
 const SessionDetail = ({show, slug, hours}) => {
     
     return(
         <div>
             <h2>{show}</h2>
             <h2>{slug}</h2>
-            <h3>Logged Hours</h3>
+            <h3>Logged Hours: {formatHours(totalHours(hours))}</h3>
+            <h3>Remaining Hours: { (totalHours(hours) < 16) ? formatHours(16 - totalHours(hours)) : "Finished!"}</h3>
+            <h3>History</h3>
             <table>
                 <thead>
                     <tr>
@@ -112,7 +124,7 @@ const SessionDetail = ({show, slug, hours}) => {
                         <td>Time Out</td>
                         <td>Remote</td>
                         <td>Comment</td>
-                        <td>Hours Logged</td>
+                        <td>Time Logged</td>
                     </tr>
                 </thead>
                 <tbody>
