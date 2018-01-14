@@ -12,7 +12,7 @@ const CastDetail = (props) => {
     
     if (cast) {
         return(
-            <div>
+            <div className="container" >
                 <h1>Cast Detail for {cast.firstName + " " + cast.lastName}</h1>
                 {
                     cast.sessions.map((session) => {

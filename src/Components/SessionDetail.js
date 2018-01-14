@@ -109,7 +109,7 @@ const totalHours = (hoursArray) => {
 const SessionDetail = ({show, slug, hours}) => {
     
     return(
-        <div>
+        <div className="container">
             <h2>{show}</h2>
             <h2>{slug}</h2>
             <h3>Logged Hours: {formatHours(totalHours(hours))}</h3>

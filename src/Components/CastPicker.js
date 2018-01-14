@@ -6,7 +6,7 @@ import { getActiveCast } from '../queries';
 
 const CastPicker = (props) => {
     return(
-        <div>
+        <div className="container" >
             <label htmlFor="cast">Cast</label>
             <select onChange={(e) => {props.onCastChange(e.target.value)}}>
                 <option>---</option>

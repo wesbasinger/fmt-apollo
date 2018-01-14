@@ -25,9 +25,19 @@ class Header extends React.Component {
     
     render() {
         return (
-            <div>
-                <Link to="/">FMT Workday Sign In</Link>
-                <ul>
+            <nav className="navbar navbar-inverse navbar-fixed-top">
+              <div className="container">
+                <div className="navbar-header">
+                  <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span className="sr-only">Toggle navigation</span>
+                    <span className="icon-bar"></span>
+                    <span className="icon-bar"></span>
+                    <span className="icon-bar"></span>
+                  </button>
+                  <Link className="navbar-brand" to="/">FMT Workday Sign In</Link>
+                </div>
+                <div id="navbar" className="collapse navbar-collapse">
+                  <ul className="nav navbar-nav">
                     <li><Link to="/signIn">Sign In</Link></li>
                     <li><Link to="/signOut">Sign Out</Link></li>
                     <li><Link to="/lookup">Lookup</Link></li>
@@ -40,11 +50,15 @@ class Header extends React.Component {
                     {
                         this.state.loggedIn ? <li><Link to="/download">Download Data</Link></li> : ""
                     }                   
+                  </ul>
+                  <div>
                     {
                         !this.state.loggedIn ? <Login onSubmit={this.handleSubmit}/> : <button onClick={ () => {this.setState({loggedIn: false})}}>Sign Out</button>
                     }
-                </ul>
-            </div>
+                  </div>
+                </div>
+              </div>
+            </nav>
         )   
     }
 }

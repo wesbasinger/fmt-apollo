@@ -52,7 +52,7 @@ class SignIn extends React.Component {
             return(<Redirect to="/" from="/signIn" />);
         } else {
             return(
-                <div>
+                <div className="container">
                     <form onSubmit={(e) => {
                         e.preventDefault();
                         

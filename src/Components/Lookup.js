@@ -28,7 +28,7 @@ class Lookup extends React.Component {
         const castDetailLink = `/castDetail/${this.state.castId}/${this.state.slug}`;
         
         return(
-            <div>
+            <div className="container">
                 <CastPicker onCastChange={this.handleCastChange} />
                 <Link to={castDetailLink}><button>Lookup</button></Link>
             </div>

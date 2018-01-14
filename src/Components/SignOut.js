@@ -19,7 +19,7 @@ class SignOut extends React.Component {
             return(<Redirect from="/signOut" to="/" />)
         } else {
             return (
-                <div>
+                <div className="container">
                     <form onSubmit={(e) => {
                         e.preventDefault()
                         
