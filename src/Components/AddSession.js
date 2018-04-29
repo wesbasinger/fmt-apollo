@@ -66,9 +66,9 @@ class AddSession extends React.Component {
                     </select>
                     <label>Session</label>
                     {/* BEWARE EVIL HARDCODED VALUES LURK BELOW!!!!!!!!!!!!!!!!!!!!!*/}
-                    <select onChange={(e) => {this.setState({show: "Beauty and the Beast", slug: "SP18"})}}>
+                    <select onChange={(e) => {this.setState({show: "Hunchback of Notre Dame", slug: "SU18"})}}>
                         <option>---</option>
-                        <option>Beauty and the Beast</option>
+                        <option>Hunchback of Notre Dame</option>
                     </select>
                     <button type="submit">Submit</button>
                 </form>
